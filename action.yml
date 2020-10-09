@@ -1,0 +1,60 @@
+name: 'Deploy to Algorithmia'
+description: 'TBD'
+branding:
+  icon: 'alert-circle'
+  color: 'yellow'
+inputs:
+  algorithmia_api_key:
+    description: 'Algorithmia API Key, used when uploading the model file'
+    required: true
+  algorithmia_username:
+    description: 'Algorithmia Username, used as Git Commit Username and as part of default model upload path'
+    required: true
+  algorithmia_email:
+    description: 'Algorithmia Email, used as Git Commit Email'
+    required: true
+  algorithmia_password:
+    description: 'Algorithmia Password. Only required if the algorithm is hosted on Algorithmia.'
+    required: false
+  github_username:
+    description: 'Github username owning the algorithm repository, used to clone the algorithm repository. Only required if the algorithm is hosted on Github.'
+    required: false
+  github_pat:
+    description: 'Github Personal Access Token, used to clone the algorithm repository. Only required if the algorithm is hosted on Github.'
+    required: false  
+  algorithmia_algoname:
+    description: 'Algorithmia Algorithm name'
+    required: true
+  algorithmia_uploadpath:
+    description: 'Algorithmia data collection name to upload the model file'
+    required: true
+    default: 'data://$ALGORITHMIA_USERNAME/$ALGORITHMIA_ALGONAME'
+  model_path:
+    description: 'Path of the model file to be uploaded to Algorithmia'
+    required: true
+    default: 'model.pkl'  
+  notebook_path:
+    description: 'Path of the notebook to be executed by this action'
+    required: false
+    default: 'model_training.ipynb'
+  git_host:
+    description: Git host for the Algorithmia algorithm repository. Change to git.algorithmia.com if the algorithm is hosted on Algorithmia.
+    required: false
+    default: 'github.com'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.algorithmia_api_key }}
+    - ${{ inputs.algorithmia_username }}
+    - ${{ inputs.algorithmia_email }}
+    - ${{ inputs.algorithmia_algoname }}
+    - ${{ inputs.algorithmia_password }}
+    - ${{ inputs.github_username }}
+    - ${{ inputs.github_pat }}
+    - ${{ inputs.algorithmia_uploadpath }}
+    - ${{ inputs.model_path }}
+    - ${{ inputs.notebook_path }}
+    - ${{ inputs.git_host }}
+    
+    
