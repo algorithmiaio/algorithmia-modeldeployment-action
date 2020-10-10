@@ -1,4 +1,4 @@
-# Continuous Deployment Github Action connecting an ML Repo at Github to Algorithmia
+# Github Action for Continuous Deployment from an ML Repo at Github to Algorithmia
 
 ## When to use?
 After you create an algorithm on Algorithmia as the scalable inference endpoint for your ML model, you can incorporate this Github Action to your Github ML repository's workflow file, to automate deploying your model and your inference (algorithm) code.
