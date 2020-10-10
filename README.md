@@ -31,7 +31,7 @@ In addition to that, the manifest file will contain certain metadata such as:
 
 By using this manifest, your inference script will know which model to load and use. It can also calculate the loaded model file's MD5 hash with the original MD5 hash that was calculated at the time of the upload, and make sure that the model file hasn't been changed.  
 
-![](model_manifest.png)
+![](images/model_manifest.png)
 
 ## How is it configured?
 
