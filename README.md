@@ -3,16 +3,23 @@
 ## When to use?
 After you create an algorithm on Algorithmia as the scalable inference endpoint for your ML model, you can incorporate this Github Action to your Github ML repository's workflow file, to automate deploying your model and your inference (algorithm) code.
 
-This action would be a good fit for your workflow if you are using a Jupyter notebook to train and evaluate your ML model or checking your saved model file into your repository and you have your inference (algorithm) script & dependencies in your ML repo. The Github Action will get deploy your model file to a data collection at Algorithmia and create a new build for your inference endpoint to use the new model, whenever you do a Git push to your master branch (or any other triggering event you configure).
+This action would be a good fit for your workflow if you are using a Jupyter notebook to train and evaluate your ML model or checking your saved model file into your repository and you have your inference (algorithm) script & dependencies in your ML repo. 
+
 
 ## How does it work?
 
+The Github Action will get deploy your model file to a data collection at Algorithmia and create a new build for your inference endpoint to use the new model, whenever you do a Git push to your master branch (or any other triggering event you configure).
+
+![](images/overview.png)
+
 Depending on your model development preference:
 
-If you're developing your ML model on a Jupyter notebook, you can configure the workflow with the notebook path and tell it where to save the model file. In this case, the workflow will run the notebook on the CI worker machine's from-scratch environment. Through our utility script, your notebook will get the path for where to save the ML model object.
+If you're developing your ML model on a Jupyter notebook, you can configure the workflow with the notebook path and tell it where to save the model file. In this case, the workflow will run the notebook on the CI worker machine's from-scratch environment. 
 If you have an already saved model checked-in to your repository, you can configure the workflow with the existing model file path.
 
 In both scenarios, the workflow will get the model file and upload it to the configured data collection on Algorithmia. 
+
+![](images/flowchart.png)
 
 ## What other perks does it have?
 To get your inference endpoint use this newly uploaded model, the workflow will make the connection between your inference algorithm and the uploaded model file, with the key-value pairs in  `model_manifest.json` file.
@@ -23,6 +30,8 @@ In addition to that, the manifest file will contain certain metadata such as:
 - When did this upload happen?
 
 By using this manifest, your inference script will know which model to load and use. It can also calculate the loaded model file's MD5 hash with the original MD5 hash that was calculated at the time of the upload, and make sure that the model file hasn't been changed.  
+
+![](model_manifest.png)
 
 ## How is it configured?
 
