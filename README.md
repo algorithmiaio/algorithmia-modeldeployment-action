@@ -1,6 +1,6 @@
 # Github Action for Continuous Deployment from an ML Repo at Github to Algorithmia
 
-## When to use?
+## When to use it?
 After you create an algorithm on Algorithmia as the scalable inference endpoint for your ML model, you can incorporate this Github Action to your Github ML repository's workflow file, to automate deploying your model and your inference (algorithm) code.
 
 This action would be a good fit for your workflow if you are using a Jupyter notebook to train and evaluate your ML model or checking your saved model file into your repository and you have your inference (algorithm) script & dependencies in your ML repo. 
@@ -33,7 +33,7 @@ By using this manifest, your inference script will know which model to load and 
 
 ![](images/model_manifest.png)
 
-## How is it configured?
+## How to configure it?
 
 The inputs to this Github Action is as follows. Please check the default values of some of them, and make sure to include them in your own ML repo's workflow file if you want a non-default configuration for these. 
 
