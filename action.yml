@@ -1,5 +1,5 @@
 name: 'Deploy to Algorithmia'
-description: 'TBD'
+description: 'Continuous Deployment of ML models and inference scripts from an ML repository to Algorithmia'
 branding:
   icon: 'alert-circle'
   color: 'yellow'
