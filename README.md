@@ -14,7 +14,7 @@ The Github Action will get deploy your model file to a data collection at Algori
 
 Depending on your model development preference:
 
-If you're developing your ML model on a Jupyter notebook, you can configure the workflow with the notebook path and tell it where to save the model file. In this case, the workflow will run the notebook on the CI worker machine's from-scratch environment. 
+If you're developing your ML model on a Jupyter notebook, you can configure the workflow with the notebook path to execute. In this case, the workflow will run the notebook on the CI worker machine's from-scratch environment. 
 If you have an already saved model checked-in to your repository, you can configure the workflow with the existing model file path.
 
 In both scenarios, the workflow will get the model file and upload it to the configured data collection on Algorithmia. 
