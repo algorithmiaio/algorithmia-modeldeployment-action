@@ -29,7 +29,7 @@ In addition to that, the manifest file will contain certain metadata such as:
 - What is the Github commit SHA and the commit message resulting in this automated upload?
 - When did this upload happen?
 
-By using this manifest, your inference script will know which model to load and use. It can also calculate the loaded model file's MD5 hash with the original MD5 hash that was calculated at the time of the upload, and make sure that the model file hasn't been changed.  
+By using this manifest, your inference script will know which model to load and use. It can also re-calculate the MD5 hash of the model file at inference time and compare it with the original MD5 hash that was calculated at the time of the upload, and make sure that the model file hasn't been changed.  
 
 ![](images/model_manifest.png)
 
