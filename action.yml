@@ -2,7 +2,7 @@ name: 'Deploy to Algorithmia'
 description: 'Continuous Deployment of ML models and inference scripts from an ML repository to Algorithmia'
 branding:
   icon: 'alert-circle'
-  color: 'yellow'
+  color: 'purple'
 inputs:
   algorithmia_api_key:
     description: 'Algorithmia API Key, used when uploading the model file'
