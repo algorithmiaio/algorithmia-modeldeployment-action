@@ -14,8 +14,10 @@ Whenever you do a Git push to your master branch (or any other triggering event 
 
 - If you're developing your ML model in a Jupyter notebook, you can configure the workflow with the notebook path to execute. In this case, the Github Action will:
   - Install the required packages in your requirements.txt file on a Github worker machine
-  - Run your configured Jupyter notebook file on the worker machine's from-scratch environment
+  - Run your configured Jupyter notebook file on the worker machine's from-scratch environment 
+  
 If not and if you have an already saved model checked-in to your repository, you can configure the workflow with the existing model file path.
+
 In both scenarios, the Github Action will then:
 - Take the ML model file from the configured path and upload it to your data collection at Algorithmia
 - Copy your inference (algorithm) script to your algorithm repository
