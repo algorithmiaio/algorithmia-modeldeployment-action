@@ -39,7 +39,11 @@ By using this manifest, your inference script will know which model to load and 
 
 ## How to configure it?
 
-The inputs to this Github Action is as follows. Please check the default values of some of them, and make sure to include them in your own ML repo's workflow file if you want a non-default configuration for these. 
+The required / optional inputs to this Github Action are listed below.
+
+Among these, some inputs are required when your Algorithmia algorithm is hosted at (backed by) Github and some will be required when your Algorithmia algorithm is hosted at (backed by) Algorithmia.
+
+You'll also notice that some of the inputs have default values, so that you're not bogged down in configuration and can start with reasonable defaults. So make sure to check out the default values first and if you want a non-default configuration for these, you can provide those values in your own ML repo's workflow file.
 
 ```
 inputs:
@@ -80,21 +84,6 @@ inputs:
     description: Git host for the Algorithmia algorithm repository. Change to git.algorithmia.com if the algorithm is hosted on Algorithmia.
     required: false
     default: 'github.com'
-runs:
-  using: 'docker'
-  image: 'Dockerfile'
-  args:
-    - ${{ inputs.algorithmia_api_key }}
-    - ${{ inputs.algorithmia_username }}
-    - ${{ inputs.algorithmia_email }}
-    - ${{ inputs.algorithmia_algoname }}
-    - ${{ inputs.algorithmia_password }}
-    - ${{ inputs.github_username }}
-    - ${{ inputs.github_pat }}
-    - ${{ inputs.algorithmia_uploadpath }}
-    - ${{ inputs.model_path }}
-    - ${{ inputs.notebook_path }}
-    - ${{ inputs.git_host }}
 ```
 
 
