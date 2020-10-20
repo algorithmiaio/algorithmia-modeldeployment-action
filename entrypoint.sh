@@ -15,35 +15,21 @@ else
     git clone https://"$INPUT_ALGORITHMIA_USERNAME":"$INPUT_ALGORITHMIA_PASSWORD"@"$INPUT_GIT_HOST"/git/"$INPUT_ALGORITHMIA_USERNAME"/"$INPUT_ALGORITHMIA_ALGONAME".git $CI_ALGO_DIR
 fi
 
-
-
-# Run action main to:
-#   - (Optionally) run the notebook file
-#   - Upload the model file to Algorithmia
-#   - Link the algorithm with the uploaded model
-python3 /src/action_main.py
-
-# Push updates to Algorithmia, and trigger a new algorithm build
-if [ $? -eq 0 ]
+if [ -d $INPUT_ALGORITHMIA_ALGONAME ]
 then
-    echo "Successfully executed action script, optionally executing the model notebook and uploading the model file to Algorithmia."
-
-    if [ -d $INPUT_ALGORITHMIA_ALGONAME ]
-    then
-        echo "Will copy and push the contents of $INPUT_ALGORITHMIA_ALGONAME directory to Algorithm repository."
-        cp -a "$INPUT_ALGORITHMIA_ALGONAME"/. $CI_ALGO_DIR/
-    else
-        echo "Could not locate the algorithm directory to push to Algorithmia."
-    fi
-
-    cd $CI_ALGO_DIR
-    git config --global user.name "$INPUT_ALGORITHMIA_USERNAME"
-    git config --global user.email "$INPUT_ALGORITHMIA_EMAIL"
-    git add .
-    git commit -m "Automated deployment via Github CI"
-    git push
+    echo "Will copy and push the contents of $INPUT_ALGORITHMIA_ALGONAME directory to Algorithm repository."
+    cp -a "$INPUT_ALGORITHMIA_ALGONAME"/. $CI_ALGO_DIR/
 else
-  echo "Action script exited with error." >&2
-  exit 1
+    echo "Could not locate the algorithm directory to copy the contents."
 fi
 
+python3 /src/action_main.py
+
+echo "Switching to the algorithm repo directory to push changes to the Algorithm repo."
+cd $CI_ALGO_DIR
+git config --global user.name "$INPUT_ALGORITHMIA_USERNAME"
+git config --global user.email "$INPUT_ALGORITHMIA_EMAIL"
+git status
+git add .
+git commit -m "Automated deployment via Github CI"
+git push
