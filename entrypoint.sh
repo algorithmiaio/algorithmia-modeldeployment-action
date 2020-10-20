@@ -28,25 +28,12 @@ if [ $? -eq 0 ]
 then
     echo "Successfully executed action script, optionally executing the model notebook and uploading the model file to Algorithmia."
 
-    if ! [ -e $INPUT_ALGORITHMIA_ALGONAME.py ]
+    if [ -d $INPUT_ALGORITHMIA_ALGONAME ]
     then
-        echo "$INPUT_ALGORITHMIA_ALGONAME.py does not exist. Checking if $INPUT_ALGORITHMIA_ALGONAME.ipynb exists."
-        if [ -e $INPUT_ALGORITHMIA_ALGONAME.ipynb ]
-        then 
-            echo "Found $INPUT_ALGORITHMIA_ALGONAME.ipynb. Will convert this into .py before pushing it to Algorithmia."
-            jupyter nbconvert --to script $INPUT_ALGORITHMIA_ALGONAME.ipynb
-        else
-            echo "Neither $INPUT_ALGORITHMIA_ALGONAME.ipynb or $INPUT_ALGORITHMIA_ALGONAME.py exist." 
-        fi
-    fi
-
-    if [ -e $INPUT_ALGORITHMIA_ALGONAME.py ]
-    then
-        echo "Will copy and push $INPUT_ALGORITHMIA_ALGONAME.py to Algorithm repository."
-        cp -R "$INPUT_ALGORITHMIA_ALGONAME.py" $CI_ALGO_DIR/src/
-        cp -R requirements.txt $CI_ALGO_DIR/requirements.txt
+        echo "Will copy and push the contents of $INPUT_ALGORITHMIA_ALGONAME directory to Algorithm repository."
+        cp -a "$INPUT_ALGORITHMIA_ALGONAME"/. $CI_ALGO_DIR/
     else
-        echo "Will not copy any inference code to Algorithmia."
+        echo "Could not locate the algorithm directory to push to Algorithmia."
     fi
 
     cd $CI_ALGO_DIR
