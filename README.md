@@ -3,7 +3,7 @@
 ## When to use it?
 After you create an algorithm on Algorithmia as the scalable inference endpoint for your ML model, you can incorporate this Github Action to your Github ML repository's workflow file, to automate deploying your model and your inference (algorithm) code.
 
-This action would be a good fit for your workflow if you are using a Jupyter notebook to train and evaluate your ML model or checking your saved model file into your repository and you have your inference (algorithm) script & dependencies in your ML repo. 
+This action would be a good fit for your workflow if you are using a Jupyter notebook to train and evaluate your ML model or checking your saved model file into your repository and you optionally prefer to work on your inference (algorithm) code in this same repository.
 
 
 ## How does it work?
@@ -20,7 +20,7 @@ If not and if you have an already saved model checked-in to your repository, you
 
 In both scenarios, the Github Action will then:
 - Take the ML model file from the configured path and upload it to your data collection at Algorithmia
-- Copy your inference (algorithm) script to your algorithm repository
+- Copy your inference (algorithm) files to your algorithm repository
 - Update/create a model_manifest.json file, connecting your inference (algorithm) code at Algorithmia with this newly uploaded model file
 
 ![](images/flowchart.png)
@@ -87,8 +87,8 @@ inputs:
 ```
 
 
-## Are there any example repositories using this Github Action?
-Of course :) Check out the two example ML repos that incorporate this Github Action to continuously deploy
+## Example usages
+Check out the two example ML repos that incorporate this Github Action to continuously deploy
   * [to an Algorithmia algorithm backed by Algorithmia](https://github.com/algorithmiaio/githubactions-modeldeployment-demo-algorithmiaalgo)
   * [to an Algorithmia algorithm backed by Github](https://github.com/algorithmiaio/githubactions-modeldeployment-demo-githubalgo)
  
