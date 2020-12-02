@@ -17,17 +17,19 @@ if __name__ == "__main__":
     notebook_path = os.getenv("INPUT_NOTEBOOK_PATH")
     model_path = os.getenv("INPUT_MODEL_PATH")
     upload_path = os.getenv("INPUT_ALGORITHMIA_UPLOADPATH")
-
-    # TODO: Make github host parametric
+    algorithmia_api = os.getenv("INPUT_ALGORITHMIA_API")
 
     error_template_str = "Field '{}' not defined in workflow file. Please check your workflow configuration"
     if not algorithmia_api_key:
         raise Exception(error_template_str.format("algorithmia_api_key"))
-    # TODO: Add new inputs checks too
-    if not model_path:
-        raise Exception(error_template_str.format("model_path"))
+    if not algorithmia_username:
+        raise Exception(error_template_str.format("algorithmia_username"))
+    if not algorithmia_algo_name:
+        raise Exception(error_template_str.format("algorithmia_algoname"))
     if not upload_path:
         raise Exception(error_template_str.format("algorithmia_uploadpath"))
+    if not model_path:
+        raise Exception(error_template_str.format("model_path"))
 
     if os.path.exists(workspace):
         try:
@@ -38,6 +40,7 @@ if __name__ == "__main__":
 
             algorithmia_deployer = algorithmia_deployer.AlgorithmiaDeployer(
                 api_key=algorithmia_api_key,
+                api_address=algorithmia_api,
                 username=algorithmia_username,
                 algo_name=algorithmia_algo_name,
                 model_path=model_path,

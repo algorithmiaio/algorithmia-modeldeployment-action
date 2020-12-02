@@ -7,44 +7,15 @@ import hashlib
 
 class AlgorithmiaDeployer:
     def __init__(
-        self,
-        api_key,
-        username,
-        algo_name,
-        model_path,
-        # algo_dir,
-        workspace_path,
+        self, api_key, api_address, username, algo_name, model_path, workspace_path,
     ) -> None:
-        self.algo_client = Algorithmia.client(api_key)
+        self.algo_client = Algorithmia.client(api_key, api_address)
         self.username = username
         self.algo_name = algo_name
         self.model_path = model_path
-        # self.algo_dir = self._replace_placeholders(algo_dir)
         self.workspace_path = workspace_path
 
         self.model_full_path = f"{workspace_path}/{model_path}"
-
-        # TODO: Remove after clarification
-        # os.environ[
-        #     "ALGORITHMIA_SCRIPT_PATH"
-        # ] = f"{self.workspace_path}/{self.algo_name}/src/{self.algo_name}.py"
-        # os.environ[
-        #     "ALGORITHMIA_REQUIREMENTS_PATH"
-        # ] = f"{self.workspace_path}/{self.algo_name}/requirements.txt"
-
-        # os.environ[
-        #     "ALGORITHMIA_SCRIPT_PATH"
-        # ] = f"{self.algo_dir}/src/{self.algo_name}.py"
-        # os.environ[
-        #     "ALGORITHMIA_REQUIREMENTS_PATH"
-        # ] = f"{self.algo_dir}/requirements.txt"
-
-        # os.environ[
-        #     "ALGORITHMIA_SCRIPT_PATH"
-        # ] = f"{self.algo_name}/src/{self.algo_name}.py"
-        # os.environ[
-        #     "ALGORITHMIA_REQUIREMENTS_PATH"
-        # ] = f"{self.algo_name}/requirements.txt"
 
     def upload_and_link_algo_model(
         self, upload_path, git_repo, git_ref, commit_SHA, commit_msg

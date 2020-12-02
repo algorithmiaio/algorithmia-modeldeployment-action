@@ -12,7 +12,8 @@ inputs:
     required: true
   algorithmia_email:
     description: 'Algorithmia Email, used as Git Commit Email'
-    required: true
+    required: false
+    default: 'githubactions@placeholder.email'
   algorithmia_password:
     description: 'Algorithmia Password. Only required if the algorithm is hosted on Algorithmia.'
     required: false
@@ -41,6 +42,10 @@ inputs:
     description: Git host for the Algorithmia algorithm repository. Change to git.algorithmia.com if the algorithm is hosted on Algorithmia.
     required: false
     default: 'github.com'
+  algorithmia_api: 
+    description: API endpoint Algorithmia installation, for enterprise customers.
+    required: false
+    default: 'https://api.algorithmia.com'
 runs:
   using: 'docker'
   image: 'Dockerfile'
@@ -56,5 +61,6 @@ runs:
     - ${{ inputs.model_path }}
     - ${{ inputs.notebook_path }}
     - ${{ inputs.git_host }}
+    - ${{ inputs.algorithmia_host }}
     
     
