@@ -1,4 +1,4 @@
-from ubuntu:20.04
+from nvidia/cuda:10.2-cudnn7-runtime-ubuntu18.04
 
 RUN apt-get update && apt-get install -y \
     git \
