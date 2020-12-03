@@ -21,7 +21,7 @@ class AlgorithmiaDeployer:
         self, upload_path, git_repo, git_ref, commit_SHA, commit_msg
     ):
         if os.path.exists(self.model_full_path):
-            model_md5_hash = self._calculate_model_md5()
+            model_md5_hash = "skipped_hash"  # self._calculate_model_md5()
             if model_md5_hash:
                 upload_path = self._replace_placeholders(upload_path)
                 algorithmia_upload_path = self._upload_model(upload_path, commit_SHA)
@@ -61,18 +61,18 @@ class AlgorithmiaDeployer:
         print(f"Replaced string became: {parametric_str}")
         return parametric_str
 
-    def _calculate_model_md5(self):
-        DIGEST_BLOCK_SIZE = 128 * 64
-        md5_hash = None
-        try:
-            with open(self.model_full_path, "rb") as f:
-                file_hash = hashlib.md5()
-                while chunk := f.read(DIGEST_BLOCK_SIZE):
-                    file_hash.update(chunk)
-            md5_hash = file_hash.hexdigest()
-        except Exception as e:
-            print(f"An exception occurred while getting MD5 hash of file: {e}")
-        return md5_hash
+    # def _calculate_model_md5(self):
+    #     DIGEST_BLOCK_SIZE = 128 * 64
+    #     md5_hash = None
+    #     try:
+    #         with open(self.model_full_path, "rb") as f:
+    #             file_hash = hashlib.md5()
+    #             while chunk := f.read(DIGEST_BLOCK_SIZE):
+    #                 file_hash.update(chunk)
+    #         md5_hash = file_hash.hexdigest()
+    #     except Exception as e:
+    #         print(f"An exception occurred while getting MD5 hash of file: {e}")
+    #     return md5_hash
 
     def _upload_model(self, remote_path, commit_SHA):
         _, model_name = os.path.split(self.model_full_path)
