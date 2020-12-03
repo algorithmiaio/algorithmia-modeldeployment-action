@@ -1,13 +1,10 @@
-FROM nvidia/cuda:10.2-runtime
+from ubuntu:20.04
 
-RUN apt update && apt install -y --no-install-recommends \
+RUN apt-get update && apt-get install -y \
     git \
-    build-essential \
-    python3-dev \
-    python3-pip \
-    python3-setuptools
-
-RUN pip3 -q install pip --upgrade
+    python3.7 \
+    python3-setuptools \
+    python3-pip
 
 RUN pip3 install algorithmia&& \
     pip3 install algorithmia-api-client&& \
