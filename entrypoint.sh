@@ -23,14 +23,7 @@ else
     echo "Could not locate the algorithm directory to copy the contents."
 fi
 
-echo "Contents before the action body:"
-pwd
-ls -al
-
 python3 /src/action_main.py
-
-ls -al
-echo "Contents after the action body:"
 
 echo "Switching to the algorithm repo directory to push changes to the Algorithm repo."
 cd $CI_ALGO_DIR
