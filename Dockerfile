@@ -1,4 +1,4 @@
-from nvidia/cuda:10.2-cudnn7-runtime-ubuntu18.04
+FROM nvidia/cuda:10.2-runtime
 
 RUN apt-get update && apt-get install -y \
     git \
