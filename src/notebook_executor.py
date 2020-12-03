@@ -5,17 +5,17 @@ from nbconvert.preprocessors.execute import CellExecutionError
 
 
 class NotebookExecutor:
-    def __init__(self, workspace_path, notebook_path, timeout=600):
+    def __init__(self, workspace_path, notebook_path):
         self.workspace_path = workspace_path
         self.notebook_full_path = f"{workspace_path}/{notebook_path}"
-        self.timeout = timeout
-
+        
+        
     def run(self):
         if os.path.exists(self.notebook_full_path):
             print(f"Running notebook: {self.notebook_full_path}")
             nb = nbformat.read(open(self.notebook_full_path), as_version=4)
             ep = ExecutePreprocessor(
-                timeout=self.timeout, kernel_name="python3", allow_errors=True
+                kernel_name="python3", allow_errors=True
             )
             try:
                 ep.preprocess(nb, {"metadata": {"path": self.workspace_path}})
