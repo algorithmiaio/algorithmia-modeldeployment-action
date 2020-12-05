@@ -62,7 +62,7 @@ class AlgorithmiaDeployer:
         return parametric_str
 
     def _calculate_model_md5(self):
-        return ""
+        return "xxx"
         # DIGEST_BLOCK_SIZE = 128 * 64
         # md5_hash = None
         # try:
