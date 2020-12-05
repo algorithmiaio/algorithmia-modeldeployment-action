@@ -19,7 +19,7 @@ RUN pip3 install algorithmia&& \
     pip3 install nbconvert[execute]
 
 COPY src /src
-COPY entrypoint.sh /entrypoint.sh
+#COPY entrypoint.sh /entrypoint.sh
+COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
-#RUN ["chmod", "+x", "entrypoint.sh"]
 ENTRYPOINT ["/entrypoint.sh"]
