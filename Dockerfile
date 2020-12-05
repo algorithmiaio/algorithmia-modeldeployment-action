@@ -18,7 +18,7 @@ RUN pip3 install algorithmia&& \
     pip3 install nbformat&& \
     pip3 install nbconvert[execute]
 
-COPY src usr/src/src
+COPY src /usr/src/src
 #COPY entrypoint.sh /entrypoint.sh
 COPY entrypoint.sh /usr/src/entrypoint.sh
 USER root
