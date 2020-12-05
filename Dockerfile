@@ -13,7 +13,8 @@ FROM cschranz/gpu-jupyter
 # RUN apt-get -y install python3-pip
 
 RUN pip3 install algorithmia&& \
-    pip3 install algorithmia-api-client&&
+    pip3 install algorithmia-api-client 
+#&& \
 # pip3 install nbformat&& \
 # pip3 install nbconvert[execute]
 
