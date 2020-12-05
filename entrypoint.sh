@@ -25,7 +25,8 @@ else
     echo "Could not locate the algorithm directory to copy the contents."
 fi
 
-python /usr/src/src/action_main.py
+#python /usr/src/src/action_main.py
+python /src/action_main.py
 
 echo "Switching to the algorithm repo directory to push changes to the Algorithm repo."
 cd $CI_ALGO_DIR
