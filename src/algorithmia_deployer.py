@@ -62,18 +62,17 @@ class AlgorithmiaDeployer:
         return parametric_str
 
     def _calculate_model_md5(self):
-        return "xxx"
-        # DIGEST_BLOCK_SIZE = 128 * 64
-        # md5_hash = None
-        # try:
-        #     with open(self.model_full_path, "rb") as f:
-        #         file_hash = hashlib.md5()
-        #         while chunk := f.read(DIGEST_BLOCK_SIZE):
-        #             file_hash.update(chunk)
-        #     md5_hash = file_hash.hexdigest()
-        # except Exception as e:
-        #     print(f"An exception occurred while getting MD5 hash of file: {e}")
-        # return md5_hash
+        DIGEST_BLOCK_SIZE = 128 * 64
+        md5 = hashlib.md5()
+        md5_hash = None
+        try:
+            with open(self.model_full_path, "rb") as f:
+                for chunk in iter(lambda: f.read(DIGEST_BLOCK_SIZE), b""):
+                    md5.update(chunk)
+            md5_hash = md5.hexdigest()
+        except Exception as e:
+            print(f"An exception occurred while getting MD5 hash of file: {e}")
+        return md5_hash
 
     def _upload_model(self, remote_path, commit_SHA):
         _, model_name = os.path.split(self.model_full_path)
