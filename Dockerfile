@@ -11,5 +11,5 @@ RUN pip3 install algorithmia&& \
 COPY src /src
 COPY entrypoint.sh /entrypoint.sh
 USER root
-RUN chmod +x entrypoint.sh
+RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
