@@ -14,11 +14,10 @@ FROM cschranz/gpu-jupyter
 
 RUN pip3 install algorithmia&& \
     pip3 install algorithmia-api-client&& \
-    # pip3 install jupyter&& \
-    pip3 install nbformat&& \
-    pip3 install nbconvert[execute]
+    # pip3 install nbformat&& \
+    # pip3 install nbconvert[execute]
 
-COPY src /usr/src/src
+    COPY src /usr/src/src
 #COPY entrypoint.sh /entrypoint.sh
 COPY entrypoint.sh /usr/src/entrypoint.sh
 USER root
