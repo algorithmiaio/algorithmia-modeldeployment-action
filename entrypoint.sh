@@ -6,7 +6,7 @@ pwd
 echo "contents:"
 ls -al
 
-cd $GITHUB_WORKSPACE
+cd $GITHUB_WORKSPACE/main
 
 echo "current dir:"
 pwd
