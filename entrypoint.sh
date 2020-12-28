@@ -19,7 +19,7 @@ pip install -r requirements.txt
 # Clone the Algorithmia algorithm repository
 CI_ALGO_DIR=$INPUT_ALGORITHMIA_ALGONAME"_CI"
 
-rm -rf $CI_ALGO_DIR
+# rm -rf $CI_ALGO_DIR
 
 if [ -z "$INPUT_ALGORITHMIA_PASSWORD" ]
 then
