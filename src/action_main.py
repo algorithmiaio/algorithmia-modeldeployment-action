@@ -17,7 +17,7 @@ if __name__ == "__main__":
     notebook_path = os.getenv("INPUT_NOTEBOOK_PATH")
     model_path = os.getenv("INPUT_MODEL_PATH")
     upload_path = os.getenv("INPUT_ALGORITHMIA_UPLOADPATH")
-    algorithmia_api = os.getenv("INPUT_ALGORITHMIA_API")
+    git_host = os.getenv("INPUT_GIT_HOST")
 
     error_template_str = "Field '{}' not defined in workflow file. Please check your workflow configuration"
     if not algorithmia_api_key:
@@ -40,7 +40,7 @@ if __name__ == "__main__":
 
             algorithmia_deployer = algorithmia_deployer.AlgorithmiaDeployer(
                 api_key=algorithmia_api_key,
-                api_address=algorithmia_api,
+                git_host=git_host,
                 username=algorithmia_username,
                 algo_name=algorithmia_algo_name,
                 model_path=model_path,

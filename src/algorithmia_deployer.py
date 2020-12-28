@@ -7,9 +7,11 @@ import hashlib
 
 class AlgorithmiaDeployer:
     def __init__(
-        self, api_key, api_address, username, algo_name, model_path, workspace_path,
+        self, api_key, git_host, username, algo_name, model_path, workspace_path,
     ) -> None:
-        self.algo_client = Algorithmia.client(api_key, api_address)
+        self.algo_client = Algorithmia.client(
+            api_key, self._api_addr_from_git_host(git_host)
+        )
         self.username = username
         self.algo_name = algo_name
         self.model_path = model_path
@@ -46,6 +48,16 @@ class AlgorithmiaDeployer:
             raise Exception(
                 f"Model file not found at {self.model_full_path}. Please check your workflow configuration."
             )
+
+    def _api_addr_from_git_host(self, git_host):
+        # Examples:
+        # git.devopsbay1.enthalpy.click -> https://api.devopsbay1.enthalpy.click
+        # git.algorithmia.com -> https://api.algorithmia.com
+        # git.test.algorithmia.com -> https://api.test.algorithmia.com
+        domain = git_host.split("git.", 1)[1]
+        api_addr = f"https://api.{domain}"
+        print(f"API address for Algorithmia client is: {api_addr}")
+        return api_addr
 
     def _replace_placeholders(self, parametric_str):
         if "$ALGORITHMIA_USERNAME" in parametric_str:
