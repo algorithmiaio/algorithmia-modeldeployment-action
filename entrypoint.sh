@@ -6,6 +6,13 @@ pwd
 echo "contents:"
 ls -al
 
+cd GITHUB_WORKSPACE
+
+echo "current dir:"
+pwd
+
+ls -al
+
 # Install the dependencies of this repo to be able to run the notebook
 pip install -r requirements.txt
 
