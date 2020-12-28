@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Install the dependencies of this repo to be able to run the notebook
-pip install -r requirements.txt
+pip install -r main/requirements.txt
 
 # Clone the Algorithmia algorithm repository
 CI_ALGO_DIR=$INPUT_ALGORITHMIA_ALGONAME"_CI"
