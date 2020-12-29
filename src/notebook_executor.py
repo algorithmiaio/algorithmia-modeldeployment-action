@@ -7,8 +7,8 @@ from nbconvert.preprocessors.execute import CellExecutionError
 class NotebookExecutor:
     def __init__(self, workspace_path, notebook_path):
         self.workspace_path = workspace_path
-        self.notebook_full_path = f"{workspace_path}/{notebook_path}"
-        # self.notebook_full_path = notebook_path
+        # self.notebook_full_path = f"{workspace_path}/{notebook_path}"
+        self.notebook_full_path = notebook_path
 
     def run(self):
         if os.path.exists(self.notebook_full_path):

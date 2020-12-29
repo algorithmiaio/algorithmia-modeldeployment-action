@@ -18,7 +18,7 @@ class AlgorithmiaDeployer:
         self.workspace_path = workspace_path
 
         self.model_full_path = f"{workspace_path}/{model_path}"
-        # self.model_full_path = model_path
+        self.model_full_path = model_path
 
     def upload_and_link_algo_model(
         self, upload_path, git_repo, git_ref, commit_SHA, commit_msg

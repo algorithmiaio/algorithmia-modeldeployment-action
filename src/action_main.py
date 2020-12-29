@@ -6,9 +6,9 @@ import notebook_executor
 
 
 if __name__ == "__main__":
-    # github_workspace = os.getenv("GITHUB_WORKSPACE")
-    # workspace = f"{github_workspace}/main"
-    workspace = os.getenv("GITHUB_WORKSPACE")
+    github_workspace = os.getenv("GITHUB_WORKSPACE")
+    workspace = f"{github_workspace}/main"
+    # workspace = os.getenv("GITHUB_WORKSPACE")
     git_repo = os.getenv("GITHUB_REPOSITORY")
     git_ref = os.getenv("GITHUB_REF")
     commit_SHA = os.getenv("GITHUB_SHA")
