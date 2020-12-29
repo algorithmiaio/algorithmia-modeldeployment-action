@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd $GITHUB_WORKSPACE/main
+#cd $GITHUB_WORKSPACE/main
 
 ls -al
 
