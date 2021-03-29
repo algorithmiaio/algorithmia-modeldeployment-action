@@ -61,6 +61,6 @@ runs:
     - ${{ inputs.model_path }}
     - ${{ inputs.notebook_path }}
     - ${{ inputs.git_host }}
-    - ${{ inputs.algorithmia_host }}
+    - ${{ inputs.algorithmia_api }}
     
     
