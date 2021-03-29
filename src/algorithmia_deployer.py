@@ -7,11 +7,9 @@ import hashlib
 
 class AlgorithmiaDeployer:
     def __init__(
-        self, api_key, git_host, username, algo_name, model_path, workspace_path,
+        self, api_key, api_address, username, algo_name, model_path, workspace_path,
     ) -> None:
-        self.algo_client = Algorithmia.client(
-            api_key, self._api_addr_from_git_host(git_host)
-        )
+        self.algo_client = Algorithmia.client(api_key, api_address)
         self.username = username
         self.algo_name = algo_name
         self.model_path = model_path
@@ -19,6 +17,8 @@ class AlgorithmiaDeployer:
 
         self.model_full_path = f"{workspace_path}/{model_path}"
         self.model_full_path = model_path
+
+        print(f"Initialized AlgorithmiaDeployer to deploy for {api_address}")
 
     def upload_and_link_algo_model(
         self, upload_path, git_repo, git_ref, commit_SHA, commit_msg
@@ -28,6 +28,9 @@ class AlgorithmiaDeployer:
             if model_md5_hash:
                 upload_path = self._replace_placeholders(upload_path)
                 algorithmia_upload_path = self._upload_model(upload_path, commit_SHA)
+                print(
+                    f"Expect to find your uploaded model at {algorithmia_upload_path}. Now it's time to update your model manifest!"
+                )
                 if algorithmia_upload_path:
                     self._update_algo_model_manifest(
                         git_repo=git_repo,
@@ -49,16 +52,6 @@ class AlgorithmiaDeployer:
             raise Exception(
                 f"Model file not found at {self.model_full_path}. Please check your workflow configuration."
             )
-
-    def _api_addr_from_git_host(self, git_host):
-        # Examples:
-        # git.devopsbay1.enthalpy.click -> https://api.devopsbay1.enthalpy.click
-        # git.algorithmia.com -> https://api.algorithmia.com
-        # git.test.algorithmia.com -> https://api.test.algorithmia.com
-        domain = git_host.split("git.", 1)[1]
-        api_addr = f"https://api.{domain}"
-        print(f"API address for Algorithmia client is: {api_addr}")
-        return api_addr
 
     def _replace_placeholders(self, parametric_str):
         if "$ALGORITHMIA_USERNAME" in parametric_str:
@@ -92,7 +85,7 @@ class AlgorithmiaDeployer:
         name_before_ext, ext = tuple(os.path.splitext(model_name))
         unique_model_name = "{}_{}{}".format(name_before_ext, commit_SHA, ext)
         print(
-            "Will upload {} from {} to {}".format(
+            "Will upload model {} from {} to {}".format(
                 unique_model_name, self.model_full_path, remote_path
             )
         )
@@ -103,12 +96,14 @@ class AlgorithmiaDeployer:
                 self.algo_client.dir(remote_path).create()
             full_remote_path = "{}/{}".format(remote_path, unique_model_name)
             if self.algo_client.file(full_remote_path).exists():
-                print(f"File with the same name exists, overriding: {full_remote_path}")
+                print(
+                    f"Model file with the same name exists, overriding: {full_remote_path}"
+                )
             result = self.algo_client.file(full_remote_path).putFile(
                 self.model_full_path
             )
             if result.path:
-                print(f"File successfully uploaded at: {full_remote_path}")
+                print(f"Model file successfully uploaded at: {full_remote_path}")
                 upload_path = result.path
         except Exception as e:
             print(
@@ -145,3 +140,7 @@ class AlgorithmiaDeployer:
 
         with open(manifest_full_path, "w+") as new_manifest_file:
             json.dump(manifest, new_manifest_file)
+
+        print(
+            "Successfully updated algorithm's model_manifest.json file with the model path"
+        )
