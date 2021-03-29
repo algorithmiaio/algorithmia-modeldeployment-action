@@ -55,7 +55,8 @@ inputs:
     required: true
   algorithmia_email:
     description: 'Algorithmia Email, used as Git Commit Email'
-    required: true
+    required: false
+    default: 'githubactions@placeholder.email'
   algorithmia_password:
     description: 'Algorithmia Password. Only required if the algorithm is hosted on Algorithmia.'
     required: false
@@ -81,9 +82,13 @@ inputs:
     required: false
     default: 'model_training.ipynb'
   git_host:
-    description: Git host for the Algorithmia algorithm repository. Change to git.algorithmia.com if the algorithm is hosted on Algorithmia.
+    description: Git host for the Algorithmia algorithm repository. Change to git.algorithmia.com if the algorithm is hosted on Algorithmia Marketplace or git.YOUR_DOMAIN for enterprise installations.
     required: false
     default: 'github.com'
+  algorithmia_api: 
+    description: API endpoint Algorithmia installation, for enterprise customers.
+    required: false
+    default: 'https://api.algorithmia.com'
 ```
 
 
